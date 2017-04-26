@@ -35,12 +35,13 @@ public:
   inline double max_n_phi_n() const {
     return max_n_phi_n_;
   }
-
+  
+  // Accessor
   inline double max_n_phi_n_n() const {
     return max_n_phi_;
   }
   
-  // Formats the primes into columns.
+  // Formats the totients into columns.
   void display_totients() const {
     const int max_totient_width = num_digits(max_totient_),
       primes_per_row = 80 / (max_totient_width + 1);
@@ -96,6 +97,9 @@ private:
     return count;
   }
 
+  /*
+    Sieve of Eratosthenes
+   */
   void sieve() {
     max_prime_ = 0;
     // TODO: write sieve algorithm
@@ -116,7 +120,11 @@ private:
     }
   }
   
-  // Completes the sieve algorithm to find the totients.
+  
+
+  /*
+    Totient Sieve
+   */
   void initPhi() {
     max_totient_ = 0;
     for(int p = 0; p <= limit_; ++p){
@@ -145,6 +153,7 @@ private:
   }
 };
 
+
 int main(int argc, char ** argv) {
   if(argc < 3){
     cout << "./sieve <number> display<y/n>" << endl;
@@ -166,12 +175,6 @@ int main(int argc, char ** argv) {
     " *************" << endl;
 
 
-  // Use stringstream for conversion. Don't forget to #include <sstream>
-  
-
-  // Check for error.
-
-  // Produces the desired output.
   Sieve sieved(limit);
   cout << endl << "Number of totients found: " << argv[1] << endl;
   cout << "Max n/phi(n): " << "n = " << sieved.max_n_phi_n_n() << endl;
